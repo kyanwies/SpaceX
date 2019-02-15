@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SpaceX</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<link rel="shortcut icon" href="favicon.ico">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="header">
+			<div class="title">
+				<h1>Follow your flight</h1>
+				<h2>It's not rocket science!</h2>
+			</div>
+			<div class="image"><img src="rocket.svg" /></div>
+		</div>
+
+		<div class="grid-container">
+			<div class="journey">
+				Journey
+				<div class="percent">73%</div>
+				<div class="arrow-down"></div>
+				<div class="progress"></div>
+				<div class="rocket"><img src="rocket.svg" /></div>
+			</div>
+			<div class="speed">
+				Speed
+				<p>21833 km/h</p>
+    				<div class="wrapper">
+						<canvas id="lineChart" width="250" height="300"></canvas>
+					</div>
+				<script type="text/javascript">
+					var line = document.getElementById('lineChart').getContext('2d');
+					var gradientStroke = line.createLinearGradient(500, 0, 50, 0);
+						gradientStroke.addColorStop(0.5, '#00ff8b');
+						gradientStroke.addColorStop(0.75, '#ff9100');
+						gradientStroke.addColorStop(1, '#ff0084');
+
+					var chart = new Chart(line, {
+						type: 'line',
+						data: {
+							labels: ["0h","24h", "48h", "72h", "96h", "120h"],
+							datasets: [{
+					            borderColor: "#ff0084",
+					            label: "Speed in Km/h",
+					            pointRadius: 5,
+					            pointBackgroundColor: "#ffffff",
+					            fill: true,
+					            backgroundColor: "#ff0084",
+					            borderWidth: 1,
+									data: [0, 416, 3878, 19430, 23579, 21833],
+							}]
+						},
+						options: {
+							responsive: true,
+					        scales: {
+					            yAxes: [{
+					                ticks: {
+					                    fontColor: "rgba(0,0,0,0.5)",
+					                    fontStyle: "bold",
+					                    beginAtZero: true,
+					                    maxTicksLimit: 5,
+					                    padding: 20
+					                },
+					                gridLines: {
+					                    drawTicks: false,
+					                    display: false
+					                }
+
+					            }],
+					            xAxes: [{
+					                gridLines: {
+					                    zeroLineColor: "transparent"
+					                },
+					                ticks: {
+					                    padding: 20,
+					                    fontColor: "rgba(0,0,0,0.5)",
+					                    fontStyle: "bold"
+					                }
+					            }]
+					        }
+					    }
+					});
+				</script>
+			</div>
+			<div class="temperature">
+				Motor temperature
+				<p>418 °C</p>
+    			<div class="wrapper">
+					<canvas id="donutChart" width="250" height="300"></canvas>
+				</div>
+				<script type="text/javascript">
+					var donut = document.getElementById('donutChart').getContext('2d');
+					var myDoughnutChart = new Chart(donut, {
+				        type: 'doughnut',
+    					data: {
+      						labels: ["Temperature in °C"],
+      						datasets: [{
+          						label: "Population (millions)",
+          						backgroundColor: ["#1fa5ff", "#edeef2"],
+          						data: [418,82]
+        					}]
+    					},
+    					options: {
+      						title: {
+        						display: false,
+      						}
+    					}
+					});
+				</script>
+			</div>
+
+		</div>
+		
+		<div class="bye">
+			<h1>Fly safe!</h1>
+			<h2>SpaceX</h2>
+		</div>
+	</body>
+</html>
